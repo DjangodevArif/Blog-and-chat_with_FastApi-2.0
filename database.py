@@ -5,8 +5,10 @@ from sqlalchemy.orm import sessionmaker
 
 DB_USERNAME = config('DB_USERNAME')
 DB_PASSWORD = config('DB_PASSWORD')
+DB_HOST = config('DB_HOST')
+DB = config('DB')
 # SQLALCHEMY_DATABASE_URL = "sqlite:///chat.db"
-SQLALCHEMY_DATABASE_URL = f"postgresql://{DB_USERNAME}:{DB_PASSWORD}@localhost:5432/fastApiChatApp"
+SQLALCHEMY_DATABASE_URL = f"postgresql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:5432/{DB}"
 # SQLALCHEMY_DATABASE_URL = "postgresql://postgres:admin@localhost:5432/fastApiChatApp"
 
 engine = create_engine(

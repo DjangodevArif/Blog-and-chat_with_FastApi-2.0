@@ -6,7 +6,7 @@ from database import Base
 from logging.config import fileConfig
 from decouple import config as env_variable
 
-from sqlalchemy import engine_from_config
+from sqlalchemy import engine_from_config, create_engine
 from sqlalchemy import pool
 
 from alembic import context
@@ -66,11 +66,17 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
-    connectable = engine_from_config(
-        config.get_section(config.config_ini_section),
-        prefix="sqlalchemy.",
-        poolclass=pool.NullPool,
-    )
+    # by default
+
+    # connectable = engine_from_config(
+    #     config.get_section(config.config_ini_section),
+    #     prefix="sqlalchemy.",
+    #     poolclass=pool.NullPool,
+    # )
+
+    # for production
+    url = f"postgresql://{env_variable('DB_USERNAME')}:{env_variable('DB_PASSWORD')}@{env_variable('DB_HOST')}:5432/{env_variable('DB')}"
+    connectable = create_engine(url)
 
     with connectable.connect() as connection:
         context.configure(

@@ -4,6 +4,7 @@ from routers.chat.models import PrivateChatRoom
 from routers.blog.models import Feed
 from database import Base
 from logging.config import fileConfig
+from decouple import config as env_variable
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
@@ -44,7 +45,8 @@ def run_migrations_offline():
 
     """
     # from database import SQLALCHEMY_DATABASE_URL
-    url = config.get_main_option("sqlalchemy.url")
+    # url = config.get_main_option("sqlalchemy.url")
+    url = f"postgresql://{env_variable('DB_USERNAME')}:{env_variable('DB_PASSWORD')}@{env_variable('DB_HOST')}:5432/{env_variable('DB')}"
     # url = SQLALCHEMY_DATABASE_URL
     context.configure(
         url=url,

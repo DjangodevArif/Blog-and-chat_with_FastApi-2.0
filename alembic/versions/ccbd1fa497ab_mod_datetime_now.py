@@ -18,12 +18,12 @@ depends_on = None
 
 
 def upgrade():
-    op.alter_column(table_name="roomchatmessage",
-                    column_name="timestamp",
-                    server_default="datetime.datetime.now()",
-                    existing_server_default=datetime.datetime.utcnow(),
-                    )
-    # pass
+    # op.alter_column(table_name="roomchatmessage",
+    #                 column_name="timestamp",
+    #                 server_default="datetime.datetime.now()",
+    #                 existing_server_default=datetime.datetime.utcnow(),
+    #                 )
+    pass
     # ### end Alembic commands ###
 
 
